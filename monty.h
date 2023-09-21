@@ -6,6 +6,8 @@
 #include <string.h>
 #include <unistd.h>
 
+#define STACK_SIZE 100
+
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)

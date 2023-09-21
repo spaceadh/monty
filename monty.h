@@ -13,6 +13,7 @@
 #define READSIZE 1024
 #define EXIT exit(EXIT_FAILURE)
 extern int stack_value;
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -22,12 +23,14 @@ extern int stack_value;
  * Description: doubly linked list node structure
  * for stack, queues, LIFO, FIFO
  */
+
 typedef struct stack_s
 {
 	int n;
 	struct stack_s *prev;
 	struct stack_s *next;
 } stack_t;
+
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
@@ -36,6 +39,7 @@ typedef struct stack_s
  * Description: opcode and its function
  * for stack, queues, LIFO, FIFO
  */
+
 typedef struct instruction_s
 {
 	char *opcode;
@@ -55,12 +59,11 @@ typedef struct opcode
 	int opcode_value;
 } opcode_t;
 /* function declaration */
-void ErrorHandler(int, char *, int);
-char **_strtokenize(char *);
+//void ErrorHandler(int, char *, int);
+char **tokenizeString(char *);
 int StrCountWord(char *, char *);
-opcode_t *StrtokenizLineCommand(char *, unsigned int);
+opcode_t *StringToken(char *, unsigned int);
 void push(stack_t **, unsigned int);
-
 void pall(stack_t **, unsigned int);
 void pop(stack_t **, unsigned int);
 void pint(stack_t **, unsigned int);

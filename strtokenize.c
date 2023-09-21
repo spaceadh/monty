@@ -1,12 +1,12 @@
 #include "monty.h"
 
 /**
- * _strtokenize - checks for end of line for command
+ * tokenizeString - checks for end of line for command
  * @readptr: pointer to command
  * Return: pointer to pointer
  *
  */
-char **_strtokenize(char *readptr)
+char **tokenizeString(char *readptr)
 {
 	char copy_readptr[1024];
 	char *delim = "$\n", *token, **argument = NULL;
@@ -32,14 +32,14 @@ char **_strtokenize(char *readptr)
 	return (argument);
 }
 /**
- * StrtokenizLineCommand - removes spaces and separates
+ * StringToken - removes spaces and separates
  * command and value
  * @argv: argument passed to function
  * @line_number: specific line being tokenized
  * Return: new argument(command)
  *
  */
-opcode_t *StrtokenizLineCommand(char *argv, unsigned int line_number)
+opcode_t *StringToken(char *argv, unsigned int line_number)
 {
 	char *delim = " ", *token = NULL;
 	opcode_t *opcode_new = NULL;

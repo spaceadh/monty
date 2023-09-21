@@ -49,19 +49,9 @@ instruction_t *initialize_opcode()
 		{"push", push},
 		{"pall", pall},
 		{"swap", swap},
-		{"pint", pint},
 		{"pop", pop},
 		{"pint", pint},
-		{"swap", swap},
 		{"add", add},
-		{"sub", Func_sub},
-		{"div", Func_div},
-		{"mul", Func_mul},
-		{"mod", Func_mod},
-		{"pchar", Func_pchar},
-		{"nop", nop},
-		{"pstr", Func_pstr},
-		{"rotl", Func_rotl},
 		{'\0', NULL}
 	};
 	return (func);
@@ -82,7 +72,7 @@ void call_func(char **argv)
 	func = initialize_opcode();
 	while (argv[i])
 	{
-		opcode_info = StrtokenizLineCommand(argv[i], line_number);
+		opcode_info = StringToken(argv[i], line_number);
 		j  = 0;
 		while (func[j].opcode)
 		{
@@ -129,7 +119,7 @@ int main(int argc, char *argv[])
 	if (!readptr)
 		ErrorHandler(3, NULL, 0);
 	read(fd, readptr, READSIZE);
-	str_token = _strtokenize(readptr);
+	str_token = tokenizeString(readptr);
 	comment_free_token =  HandleComment(str_token);
 	call_func(comment_free_token);
 	return (0);

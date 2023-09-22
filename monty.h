@@ -59,7 +59,7 @@ typedef struct opcode
 	int opcode_value;
 } opcode_t;
 /* function declaration */
-//void ErrorHandler(int, char *, int);
+/*void ErrorHandler(int, char *, int);*/
 char **tokenizeString(char *);
 int StrCountWord(char *, char *);
 opcode_t *StringToken(char *, unsigned int);

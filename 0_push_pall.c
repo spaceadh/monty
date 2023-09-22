@@ -1,36 +1,58 @@
 #include "monty.h"
 
-
-int stack[STACK_SIZE];
-int top = -1; 
+stack_t *top = NULL;
 
 void push(int value) 
 {
-    if (top == STACK_SIZE - 1) 
+    stack_t *new_stack_t = (stack_t*)malloc(sizeof(stack_t));
+    if (new_stack_t == NULL) 
     {
-        fprintf(stderr, "Stack overflow\n");
+        fprintf(stderr, "Memory allocation failed\n");
         exit(EXIT_FAILURE);
     }
-    stack[++top] = value;
+    new_stack_t->n = value;
+    new_stack_t->next = top;
+    new_stack_t->prev = NULL;
+
+    if (top != NULL) 
+    {
+        top->prev = new_stack_t;
+    }
+
+    top = new_stack_t;
 }
 
-int i;
 void pall() 
 {
-    for (i = top; i >= 0; i--) 
+    stack_t *current = top;
+    while (current != NULL) 
     {
-        printf("%d\n", stack[i]);
+        printf("%d\n", current->n);
+        current = current->next;
     }
 }
 
+int pop()
+{
+    int value;
+    stack_t *temp;
 
-int pop() {
-    if (top == -1) 
+    if (top == NULL) 
     {
         fprintf(stderr, "Stack underflow\n");
         exit(EXIT_FAILURE);
     }
-    return stack[top--];
+    value = top->n;
+    temp = top;
+    top = top->next;
+
+    if (top != NULL) 
+    {
+        top->prev = NULL;
+    }
+
+    free(temp);
+    return value;
 }
 
 FILE *file;
@@ -81,6 +103,13 @@ int main(int argc, char *argv[])
     }
 
     fclose(file);
+
+    while (top != NULL) 
+    {
+        stack_t *temp = top;
+        top = top->next;
+        free(temp);
+    }
 
     return EXIT_SUCCESS;
 }
